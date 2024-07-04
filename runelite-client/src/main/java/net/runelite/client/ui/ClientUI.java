@@ -336,7 +336,7 @@ public class ClientUI
 			frame = new ContainableFrame();
 
 			// Try to enable fullscreen on OSX
-			OSXUtil.tryEnableFullscreen(frame);
+			//OSXUtil.tryEnableFullscreen(frame);
 
 			frame.setTitle(title);
 			frame.setIconImages(Arrays.asList(ICON_128, ICON_16));
@@ -556,26 +556,26 @@ public class ClientUI
 				{
 					rp.putClientProperty(FlatClientProperties.USE_WINDOW_DECORATIONS, true);
 				}
-				else if (OSType.getOSType() == OSType.MacOS && SystemInfo.isMacFullWindowContentSupported)
+				else if (OSType.getOSType() == OSType.MacOS) // && SystemInfo.isMacFullWindowContentSupported)
 				{
-					rp.putClientProperty("apple.awt.fullWindowContent", true);
-					rp.putClientProperty("apple.awt.transparentTitleBar", true);
+					//rp.putClientProperty("apple.awt.fullWindowContent", true);
+					//rp.putClientProperty("apple.awt.transparentTitleBar", true);
 
 					// use our own title if supported.
 					// the native title color is determined by the application appearance,
 					// which will lead to grey text on a black background if the appearance
 					// is light mode.
-					if (Runtime.version().feature() >= 17)
-					{
-						rp.putClientProperty("apple.awt.windowTitleVisible", false);
-						rp.putClientProperty(RuneLiteRootPaneUI.PROP_RUNELITE_TITLEBAR, true); // enable titlebar before adjusting visibility props
-						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_CLOSE, false);
-						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_MAXIMIZE, false);
-						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICONIFFY, false);
-						rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
-					}
+					//if (Runtime.version().feature() >= 17)
+					//{
+					//	rp.putClientProperty("apple.awt.windowTitleVisible", false);
+					//	rp.putClientProperty(RuneLiteRootPaneUI.PROP_RUNELITE_TITLEBAR, true); // enable titlebar before adjusting visibility props
+					//	rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_CLOSE, false);
+					//	rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_MAXIMIZE, false);
+					//	rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICONIFFY, false);
+					//	rp.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
+					//}
 
-					menuBar.setBorder(new EmptyBorder(3, 70, 3, 10));
+					//menuBar.setBorder(new EmptyBorder(3, 70, 3, 10));
 				}
 				else
 				{
@@ -1217,11 +1217,11 @@ public class ClientUI
 			return;
 		}
 
-		if (frame.getGraphicsConfiguration().getDevice().getFullScreenWindow() == null
-			&& !safeMode)
-		{
-			frame.setOpacity(config.windowOpacity() / 100.0f);
-		}
+		//if (frame.getGraphicsConfiguration().getDevice().getFullScreenWindow() == null
+		//	&& !safeMode)
+		//{
+		//	frame.setOpacity(config.windowOpacity() / 100.0f);
+		//}
 
 		if (config.usernameInTitle() && (client instanceof Client))
 		{
