@@ -252,7 +252,7 @@ public class ExternalPluginManager
 					}
 					catch (IOException | VerificationException e)
 					{
-						externalPlugins.remove(jarData);
+						//externalPlugins.remove(jarData);
 						log.error("Unable to download external plugin \"{}\"", jarData.getInternalName(), e);
 					}
 				}
@@ -304,11 +304,11 @@ public class ExternalPluginManager
 			for (PluginHubManifest.JarData jarData : add)
 			{
 				// I think this can't happen, but just in case
-				if (!jarData.isValid())
-				{
-					log.warn("Invalid plugin for validated manifest: {}", jarData);
-					continue;
-				}
+				//if (!jarData.isValid())
+				//{
+				//	log.warn("Invalid plugin for validated manifest: {}", jarData);
+				//	continue;
+				//}
 
 				log.info("Loading external plugin \"{}\" jar \"{}\"", jarData.getInternalName(), jarData.getJarHash());
 
