@@ -231,31 +231,31 @@ public class ExternalPluginManager
 				int toDownload = needsDownload.stream().mapToInt(PluginHubManifest.JarData::getJarSize).sum();
 				int downloaded = 0;
 
-				for (PluginHubManifest.JarData jarData : needsDownload)
-				{
-					HttpUrl url = externalPluginClient.getJarURL(jarData);
+				//for (PluginHubManifest.JarData jarData : needsDownload)
+				//{
+				//	HttpUrl url = externalPluginClient.getJarURL(jarData);
 
-					try (Response res = okHttpClient.newCall(new Request.Builder().url(url).build()).execute())
-					{
-						int fdownloaded = downloaded;
-						downloaded += jarData.getJarSize();
-						HashingInputStream his = new HashingInputStream(Hashing.sha256(),
-							new CountingInputStream(res.body().byteStream(), i ->
-								SplashScreen.stage(splashStart + (splashLength * .2), splashStart + (splashLength * .8),
-									null, "Downloading " + jarData.getDisplayName(),
-									i + fdownloaded, toDownload, true)));
-						Files.asByteSink(jarData.getJarFile()).writeFrom(his);
-						if (!PluginHubManifest.HASH_ENCODER.encodeToString(his.hash().asBytes()).equals(jarData.getJarHash()))
-						{
-							throw new VerificationException("Plugin " + jarData.getInternalName() + " didn't match its hash");
-						}
-					}
-					catch (IOException | VerificationException e)
-					{
-						//externalPlugins.remove(jarData);
-						log.error("Unable to download external plugin \"{}\"", jarData.getInternalName(), e);
-					}
-				}
+				//	try (Response res = okHttpClient.newCall(new Request.Builder().url(url).build()).execute())
+				//	{
+				//		int fdownloaded = downloaded;
+				//		downloaded += jarData.getJarSize();
+				//		HashingInputStream his = new HashingInputStream(Hashing.sha256(),
+				//			new CountingInputStream(res.body().byteStream(), i ->
+				//				SplashScreen.stage(splashStart + (splashLength * .2), splashStart + (splashLength * .8),
+				//					null, "Downloading " + jarData.getDisplayName(),
+				//					i + fdownloaded, toDownload, true)));
+				//		Files.asByteSink(jarData.getJarFile()).writeFrom(his);
+				//		if (!PluginHubManifest.HASH_ENCODER.encodeToString(his.hash().asBytes()).equals(jarData.getJarHash()))
+				//		{
+				//			throw new VerificationException("Plugin " + jarData.getInternalName() + " didn't match its hash");
+				//		}
+				//	}
+				//	catch (IOException | VerificationException e)
+				//	{
+				//		//externalPlugins.remove(jarData);
+				//		log.error("Unable to download external plugin \"{}\"", jarData.getInternalName(), e);
+				//	}
+				//}
 			}
 			catch (IOException | VerificationException e)
 			{
